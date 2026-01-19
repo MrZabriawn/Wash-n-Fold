@@ -1,0 +1,240 @@
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { insertOrderSchema, type InsertOrder } from "@shared/schema";
+import { useCreateOrder } from "@/hooks/use-orders";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Calculator, Loader2, Send, PhoneCall } from "lucide-react";
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+export function OrderForm() {
+  const mutation = useCreateOrder();
+  const [estimatedTotal, setEstimatedTotal] = useState<number>(0);
+  const [showCallMessage, setShowCallMessage] = useState(false);
+
+  const form = useForm<InsertOrder>({
+    resolver: zodResolver(insertOrderSchema),
+    defaultValues: {
+      name: "",
+      phone: "",
+      address: "",
+      pounds: 0,
+      bagCount: 0,
+      distanceTier: "less_than_5",
+      humanVerify: "",
+    },
+  });
+
+  const pounds = form.watch("pounds");
+  const bagCount = form.watch("bagCount");
+  const distanceTier = form.watch("distanceTier");
+
+  useEffect(() => {
+    if (distanceTier === "more_than_20") {
+      setShowCallMessage(true);
+      setEstimatedTotal(0);
+      return;
+    }
+    setShowCallMessage(false);
+
+    let deliveryFee = 0;
+    if (distanceTier === "less_than_5") deliveryFee = 5;
+    if (distanceTier === "5_to_20") deliveryFee = 10;
+
+    // Price calc: $1.50/lb + $0.50/bag + Delivery
+    const lbsCost = (pounds || 0) * 1.5;
+    const bagsCost = (bagCount || 0) * 0.5;
+    setEstimatedTotal(lbsCost + bagsCost + deliveryFee);
+  }, [pounds, bagCount, distanceTier]);
+
+  function onSubmit(data: InsertOrder) {
+    if (showCallMessage) return;
+    mutation.mutate(data, {
+      onSuccess: () => form.reset()
+    });
+  }
+
+  return (
+    <Card className="border-0 shadow-2xl bg-white/80 backdrop-blur-sm overflow-hidden">
+      <div className="h-2 bg-gradient-to-r from-primary to-secondary w-full" />
+      <CardContent className="p-8 md:p-10">
+        <div className="flex items-center gap-3 mb-8">
+          <div className="bg-primary/10 p-3 rounded-xl">
+            <Calculator className="w-6 h-6 text-primary" />
+          </div>
+          <h3 className="text-2xl font-bold text-gray-900">Start Your Order</h3>
+        </div>
+
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Full Name</FormLabel>
+                    <FormControl>
+                      <Input placeholder="John Doe" className="bg-white" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="phone"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Phone Number</FormLabel>
+                    <FormControl>
+                      <Input placeholder="(555) 123-4567" className="bg-white" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+
+            <FormField
+              control={form.control}
+              name="address"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Pickup Address</FormLabel>
+                  <FormControl>
+                    <Input placeholder="123 Main St, Aliquippa, PA" className="bg-white" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <FormField
+                control={form.control}
+                name="pounds"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Est. Weight (lbs)</FormLabel>
+                    <FormControl>
+                      <Input type="number" min="0" placeholder="0" className="bg-white" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="bagCount"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Number of Bags</FormLabel>
+                    <FormControl>
+                      <Input type="number" min="0" placeholder="0" className="bg-white" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="distanceTier"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Distance from Aliquippa</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormControl>
+                        <SelectTrigger className="bg-white">
+                          <SelectValue placeholder="Select distance" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="less_than_5">Less than 5 miles ($5)</SelectItem>
+                        <SelectItem value="5_to_20">5 to 20 miles ($10)</SelectItem>
+                        <SelectItem value="more_than_20">More than 20 miles</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+
+            <AnimatePresence mode="wait">
+              {showCallMessage ? (
+                <motion.div 
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="bg-amber-50 border border-amber-200 rounded-xl p-6 text-center"
+                >
+                  <PhoneCall className="w-8 h-8 text-amber-500 mx-auto mb-3" />
+                  <h4 className="text-amber-800 font-bold mb-2">Service Area Exception</h4>
+                  <p className="text-amber-700 text-sm mb-4">
+                    For pickups over 20 miles, we need to coordinate directly with you.
+                  </p>
+                  <a href="tel:7245550123" className="inline-flex items-center gap-2 font-bold text-amber-900 bg-amber-200/50 px-6 py-3 rounded-lg hover:bg-amber-200 transition-colors">
+                    Call (724) 555-0123
+                  </a>
+                </motion.div>
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                >
+                  <div className="bg-gray-50 rounded-xl p-6 mb-6 border border-gray-100">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-muted-foreground">Estimated Total:</span>
+                      <span className="text-3xl font-bold text-primary">${estimatedTotal.toFixed(2)}</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground text-right">*Includes delivery fee based on distance</p>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-end">
+                    <FormField
+                      control={form.control}
+                      name="humanVerify"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Security Check: What is 5 + 3?</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Enter number" className="bg-white" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <Button 
+                      type="submit" 
+                      disabled={mutation.isPending}
+                      className="w-full h-11 text-lg font-bold bg-secondary hover:bg-secondary/90 transition-all shadow-lg shadow-secondary/25 hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0"
+                    >
+                      {mutation.isPending ? (
+                        <>
+                          <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                          Submitting...
+                        </>
+                      ) : (
+                        <>
+                          Schedule Pickup
+                          <Send className="ml-2 h-5 w-5" />
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </form>
+        </Form>
+      </CardContent>
+    </Card>
+  );
+}
