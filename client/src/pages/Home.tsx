@@ -14,7 +14,7 @@ export default function Home() {
               <Shirt className="h-6 w-6" />
             </div>
             <span className="font-display font-bold text-xl text-primary-foreground tracking-tight hidden sm:block">
-              Aliquippa Laundry
+              Aliquippa Wash n Fold
             </span>
           </div>
           <div className="flex items-center gap-6 text-sm font-medium">
@@ -45,8 +45,8 @@ export default function Home() {
                 Fresh & Clean in 24 Hours
               </span>
               <h1 className="text-5xl md:text-7xl font-extrabold text-gray-900 mb-6 leading-tight">
-                Laundry Day <br className="hidden sm:block" />
-                <span className="text-primary">Done For You.</span>
+                Aliquippa <br className="hidden sm:block" />
+                <span className="text-primary">Wash n Fold.</span>
               </h1>
               <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
                 Premium Wash & Fold service in Aliquippa. We pick up, clean, and deliver your clothes fresh and neatly folded.
@@ -177,7 +177,7 @@ export default function Home() {
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <Shirt className="h-6 w-6 text-primary" />
-                <span className="font-display font-bold text-xl">Aliquippa Laundry</span>
+                <span className="font-display font-bold text-xl">Aliquippa Wash n Fold</span>
               </div>
               <p className="text-gray-400 text-sm leading-relaxed">
                 Professional wash and fold service committed to quality and convenience. Your clothes are safe with us.
@@ -218,7 +218,7 @@ export default function Home() {
           </div>
           
           <div className="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
-            <p>&copy; {new Date().getFullYear()} Aliquippa Laundry Service. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} Aliquippa Wash n Fold. All rights reserved.</p>
           </div>
         </div>
       </footer>
