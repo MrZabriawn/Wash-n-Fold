@@ -178,8 +178,8 @@ export function OrderForm() {
                   <p className="text-amber-700 text-sm mb-4">
                     For pickups over 20 miles, we need to coordinate directly with you.
                   </p>
-                  <a href="tel:7245550123" className="inline-flex items-center gap-2 font-bold text-amber-900 bg-amber-200/50 px-6 py-3 rounded-lg hover:bg-amber-200 transition-colors">
-                    Call (724) 555-0123
+                  <a href="tel:7248000295" className="inline-flex items-center gap-2 font-bold text-amber-900 bg-amber-200/50 px-6 py-3 rounded-lg hover:bg-amber-200 transition-colors">
+                    Call (724) 800-0295
                   </a>
                 </motion.div>
               ) : (

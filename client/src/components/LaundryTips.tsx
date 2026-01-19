@@ -10,26 +10,26 @@ import tip4 from "@assets/stock_images/laundry_washing_clot_4133e947.jpg";
 const tips = [
   {
     title: "Cold Water Wins",
-    description: "Washing in cold water prevents shrinking and fading while saving energy. Most modern detergents work perfectly in cold temps!",
+    description: "Washing in cold water prevents shrinking and fading while saving energy. Most modern detergents work perfectly in cold&nbsp;temps!",
     icon: Thermometer,
     image: tip1,
   },
   {
     title: "Inside Out",
-    description: "Turn jeans and graphic tees inside out before washing to protect colors and prints from abrasive rubbing during the cycle.",
+    description: "Turn jeans and graphic tees inside out before washing to protect colors and prints from abrasive rubbing during the&nbsp;cycle.",
     icon: Wind,
     image: tip2,
   },
   {
     title: "The Truth About Scent Pellets",
-    description: "Those little scent pellets (Unstoppables) might smell nice, but they're often made of synthetic wax that can coat fibers and aren't great for the environment.",
+    description: "Those little scent pellets (Unstoppables) might smell nice, but they're often made of synthetic wax that can coat fibers and aren't great for the&nbsp;environment.",
     icon: AlertTriangle,
     image: tip3,
     isWarning: true,
   },
   {
     title: "Don't Overload",
-    description: "Clothes need room to tumble and for water to circulate. Overloading can lead to poor cleaning and extra wear on your machine.",
+    description: "Clothes need room to tumble and for water to circulate. Overloading can lead to poor cleaning and extra wear on your&nbsp;machine.",
     icon: Droplets,
     image: tip4,
   },

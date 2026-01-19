@@ -32,7 +32,7 @@ export function PricingCard({ title, price, unit, description, icon: Icon, color
           <span className="text-muted-foreground font-medium">/{unit}</span>
         </div>
         
-        <p className="text-muted-foreground text-sm leading-relaxed">
+        <p className="text-muted-foreground text-sm leading-relaxed text-balance">
           {description}
         </p>
       </div>

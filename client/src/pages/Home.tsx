@@ -21,9 +21,9 @@ export default function Home() {
           <div className="flex items-center gap-6 text-sm font-medium">
             <a href="#pricing" className="text-gray-600 hover:text-primary transition-colors">Pricing</a>
             <a href="#order" className="text-gray-600 hover:text-primary transition-colors">Schedule Pickup</a>
-            <a href="tel:7245550123" className="hidden sm:flex items-center gap-2 text-primary bg-primary/10 px-4 py-2 rounded-full hover:bg-primary/20 transition-colors">
+            <a href="tel:7248000295" className="hidden sm:flex items-center gap-2 text-primary bg-primary/10 px-4 py-2 rounded-full hover:bg-primary/20 transition-colors">
               <Phone className="h-4 w-4" />
-              (724) 555-0123
+              (724) 800-0295
             </a>
           </div>
         </div>
@@ -50,7 +50,7 @@ export default function Home() {
                 <span className="text-primary">Wash n Fold.</span>
               </h1>
               <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-                Premium Wash & Fold service in Aliquippa. We pick up, clean, and deliver your clothes fresh and neatly folded.
+                Premium Wash & Fold service in Aliquippa. We pick up, clean, and deliver your clothes fresh and neatly&nbsp;folded.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <a href="#order" className="w-full sm:w-auto px-8 py-4 bg-primary hover:bg-primary/90 text-white rounded-full font-bold text-lg shadow-lg shadow-primary/25 hover:shadow-xl hover:-translate-y-1 transition-all">
@@ -90,8 +90,8 @@ export default function Home() {
       <section id="pricing" className="py-24 bg-white relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Simple, Transparent Pricing</h2>
-            <p className="text-lg text-muted-foreground">No hidden fees. Just clean clothes.</p>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4 text-balance">Simple, Transparent Pricing</h2>
+            <p className="text-lg text-muted-foreground text-balance">No hidden fees. Just clean&nbsp;clothes.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -165,8 +165,8 @@ export default function Home() {
       <section id="order" className="py-24 bg-primary/5 relative">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Ready for Fresh Clothes?</h2>
-            <p className="text-lg text-muted-foreground">Fill out the form below to schedule your pickup.</p>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4 text-balance">Ready for Fresh Clothes?</h2>
+            <p className="text-lg text-muted-foreground text-balance">Fill out the form below to schedule your&nbsp;pickup.</p>
           </div>
           
           <OrderForm />
@@ -182,8 +182,8 @@ export default function Home() {
                 <Shirt className="h-6 w-6 text-primary" />
                 <span className="font-display font-bold text-xl">Aliquippa Wash n Fold</span>
               </div>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                Professional wash and fold service committed to quality and convenience. Your clothes are safe with us.
+              <p className="text-gray-400 text-sm leading-relaxed text-balance">
+                Professional wash and fold service committed to quality and convenience. Your clothes are safe with&nbsp;us.
               </p>
             </div>
             
@@ -196,7 +196,7 @@ export default function Home() {
                 </li>
                 <li className="flex items-center gap-3">
                   <Phone className="w-5 h-5 text-primary shrink-0" />
-                  <a href="tel:7245550123" className="hover:text-white transition-colors">(724) 555-0123</a>
+                  <a href="tel:7248000295" className="hover:text-white transition-colors">(724) 800-0295</a>
                 </li>
               </ul>
             </div>
