@@ -9,15 +9,15 @@ import tip4 from "@assets/stock_images/laundry_washing_clot_4133e947.jpg";
 
 const tips = [
   {
-    title: "Cold Water Wins",
-    description: "Washing in cold water prevents shrinking and fading while saving energy. Most modern detergents work perfectly in cold&nbsp;temps!",
-    icon: Thermometer,
+    title: "Sort Before You Go",
+    description: "Save time and machine space by sorting your lights, darks, and towels at home. It makes loading the washers a breeze!",
+    icon: Wind,
     image: tip1,
   },
   {
-    title: "Inside Out",
-    description: "Turn jeans and graphic tees inside out before washing to protect colors and prints from abrasive rubbing during the&nbsp;cycle.",
-    icon: Wind,
+    title: "Check Your Pockets",
+    description: "Always double-check pockets for pens, coins, or tissues. One stray tissue can leave white lint on your entire load!",
+    icon: Sparkles,
     image: tip2,
   },
   {
@@ -28,8 +28,8 @@ const tips = [
     isWarning: true,
   },
   {
-    title: "Don't Overload",
-    description: "Clothes need room to tumble and for water to circulate. Overloading can lead to poor cleaning and extra wear on your&nbsp;machine.",
+    title: "Don't Overload the Dryers",
+    description: "Clothes need room to tumble for air to circulate. A half-full dryer dries faster and leaves your clothes with fewer&nbsp;wrinkles!",
     icon: Droplets,
     image: tip4,
   },
