@@ -17,7 +17,7 @@ export function OrderForm() {
   const [estimatedTotal, setEstimatedTotal] = useState<number>(0);
   const [showCallMessage, setShowCallMessage] = useState(false);
 
-  const form = useForm<InsertOrder>({
+  const form = useForm<any>({
     resolver: zodResolver(insertOrderSchema),
     defaultValues: {
       name: "",
@@ -25,7 +25,7 @@ export function OrderForm() {
       address: "",
       pounds: 0,
       bagCount: 0,
-      distanceTier: "less_than_5",
+      distanceTier: "less_than_5" as const,
       humanVerify: "",
     },
   });

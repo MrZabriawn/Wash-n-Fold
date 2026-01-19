@@ -24,7 +24,7 @@ export const insertOrderSchema = createInsertSchema(orders).omit({
   pounds: z.coerce.number().min(1, "Minimum 1 pound required"),
   bagCount: z.coerce.number().min(1, "Minimum 1 bag required"),
   // Simple captcha field
-  humanVerify: z.string().refine(val => val === "8", { message: "Incorrect math answer" })
+  humanVerify: z.string()
 });
 
 export type Order = typeof orders.$inferSelect;

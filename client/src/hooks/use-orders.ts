@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { api, type InsertOrder } from "@shared/routes";
+import { api } from "@shared/routes";
+import { type InsertOrder } from "@shared/schema";
 import { useToast } from "@/hooks/use-toast";
 
 export function useCreateOrder() {
@@ -16,13 +17,13 @@ export function useCreateOrder() {
 
       if (!res.ok) {
         if (res.status === 400) {
-          const error = api.orders.create.responses[400].parse(await res.json());
+          const error = await res.json();
           throw new Error(error.message || "Validation failed");
         }
         throw new Error('Failed to submit order');
       }
 
-      return api.orders.create.responses[201].parse(await res.json());
+      return await res.json();
     },
     onSuccess: () => {
       toast({
@@ -30,7 +31,6 @@ export function useCreateOrder() {
         description: "We'll be in touch shortly to confirm your pickup.",
         variant: "default",
       });
-      // In a real app we might invalidate a list, but here we just show success
     },
     onError: (error: Error) => {
       toast({
