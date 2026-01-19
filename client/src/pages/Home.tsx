@@ -1,5 +1,6 @@
 import { OrderForm } from "@/components/OrderForm";
 import { PricingCard } from "@/components/PricingCard";
+import { LaundryTips } from "@/components/LaundryTips";
 import { Shirt, ShoppingBag, Truck, MapPin, Phone, Clock, Star, ArrowDown } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -157,6 +158,8 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+
+      <LaundryTips />
 
       {/* Order Section */}
       <section id="order" className="py-24 bg-primary/5 relative">
