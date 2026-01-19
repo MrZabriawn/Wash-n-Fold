@@ -7,7 +7,8 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Calculator, Loader2, Send, PhoneCall } from "lucide-react";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Calculator, Loader2, Send, PhoneCall, Info } from "lucide-react";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -120,7 +121,32 @@ export function OrderForm() {
                 name="pounds"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Est. Weight (lbs)</FormLabel>
+                    <div className="flex items-center justify-between">
+                      <FormLabel>Est. Weight (lbs)</FormLabel>
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <Button variant="ghost" size="icon" className="h-6 w-6 text-muted-foreground hover:text-primary">
+                            <Info className="h-4 w-4" />
+                          </Button>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-80 p-4">
+                          <div className="space-y-3">
+                            <h4 className="font-bold text-sm border-b pb-2">Common Weights Guide</h4>
+                            <ul className="text-xs space-y-2">
+                              <li className="flex justify-between"><span>Jeans (Adult)</span> <span className="font-mono text-primary">~1.5 lbs</span></li>
+                              <li className="flex justify-between"><span>Sweatshirt / Hoodie</span> <span className="font-mono text-primary">~1.2 lbs</span></li>
+                              <li className="flex justify-between"><span>Bath Towel (Large)</span> <span className="font-mono text-primary">~1.0 lb</span></li>
+                              <li className="flex justify-between"><span>T-Shirt (Adult)</span> <span className="font-mono text-primary">~0.5 lb</span></li>
+                              <li className="flex justify-between"><span>Queen Sheet Set</span> <span className="font-mono text-primary">~3.0 lbs</span></li>
+                              <li className="flex justify-between"><span>Full Laundry Basket</span> <span className="font-mono text-primary">~15-20 lbs</span></li>
+                            </ul>
+                            <p className="text-[10px] text-muted-foreground pt-2 border-t italic">
+                              *These are rough estimates to help with your calculation.
+                            </p>
+                          </div>
+                        </PopoverContent>
+                      </Popover>
+                    </div>
                     <FormControl>
                       <Input type="number" min="0" placeholder="0" className="bg-white" {...field} />
                     </FormControl>
