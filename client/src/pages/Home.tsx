@@ -1,9 +1,9 @@
 import { OrderForm } from "@/components/OrderForm";
 import { PricingCard } from "@/components/PricingCard";
 import { LaundryTips } from "@/components/LaundryTips";
-import { Shirt, ShoppingBag, Truck, MapPin, Phone, Clock, Star, ArrowDown } from "lucide-react";
+import { Shirt, ShoppingBag, Truck, MapPin, Phone, Clock, Star, ArrowDown, Building2 } from "lucide-react";
 import { motion } from "framer-motion";
-import logoImg from "@assets/IMG_6127_1768795155680.png";
+import logoImg from "@assets/WnF_Solo_Logo_1768874166399.png";
 
 export default function Home() {
   return (
@@ -12,9 +12,7 @@ export default function Home() {
       <nav className="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="h-12 w-12 overflow-hidden flex items-center justify-center">
-              <img src={logoImg} alt="Aliquippa Wash n Fold Logo" className="h-full w-auto max-w-none -translate-x-[5%]" style={{ clipPath: 'inset(0 65% 0 0)' }} />
-            </div>
+            <img src={logoImg} alt="Aliquippa Wash n Fold Logo" className="h-12 w-auto" />
             <span className="font-display font-bold text-xl text-primary tracking-tight hidden sm:block">
               Aliquippa Wash n Fold
             </span>
@@ -106,11 +104,11 @@ export default function Home() {
               delay={0}
             />
             <PricingCard 
-              title="Per Bag"
-              price="$0.50"
-              unit="bag"
-              description="Handling fee per laundry bag used for separation or delivery."
-              icon={ShoppingBag}
+              title="Commercial"
+              price="Custom"
+              unit="quote"
+              description="Dedicated solutions for gyms, hotels, spas, and more. High volume discounts."
+              icon={Building2}
               colorClass="bg-secondary"
               delay={0.1}
             />
@@ -180,9 +178,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <div className="h-10 w-10 overflow-hidden flex items-center justify-center invert brightness-0">
-                  <img src={logoImg} alt="Aliquippa Wash n Fold Logo" className="h-full w-auto max-w-none -translate-x-[5%]" style={{ clipPath: 'inset(0 65% 0 0)' }} />
-                </div>
+                <img src={logoImg} alt="Aliquippa Wash n Fold Logo" className="h-10 w-auto invert brightness-0" />
                 <span className="font-display font-bold text-xl">Aliquippa Wash n Fold</span>
               </div>
               <p className="text-gray-400 text-sm leading-relaxed text-balance">

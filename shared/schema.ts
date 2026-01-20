@@ -10,6 +10,8 @@ export const orders = pgTable("orders", {
   pounds: numeric("pounds").notNull(), // User estimates weight
   bagCount: integer("bag_count").notNull(),
   distanceTier: text("distance_tier", { enum: ["less_than_5", "5_to_20", "more_than_20"] }).notNull(),
+  serviceType: text("service_type", { enum: ["residential", "commercial"] }).default("residential").notNull(),
+  businessName: text("business_name"),
   estimatedPrice: numeric("estimated_price"), // Server-calculated based on inputs
   status: text("status", { enum: ["pending", "confirmed", "completed"] }).default("pending").notNull(),
   createdAt: timestamp("created_at").defaultNow(),
@@ -21,8 +23,10 @@ export const insertOrderSchema = createInsertSchema(orders).omit({
   createdAt: true 
 }).extend({
   // Override numeric to be number for zod validation from form
-  pounds: z.coerce.number().min(1, "Minimum 1 pound required"),
-  bagCount: z.coerce.number().min(1, "Minimum 1 bag required"),
+  pounds: z.coerce.number().min(0, "Weight must be non-negative"),
+  bagCount: z.coerce.number().min(0, "Bag count must be non-negative"),
+  serviceType: z.enum(["residential", "commercial"]),
+  businessName: z.string().optional(),
   // Simple captcha field
   humanVerify: z.string()
 });

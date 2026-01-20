@@ -1,0 +1,206 @@
+Laundromat Website prompt
+
+You are Claude Code. Build a production-ready, single-page website for “Aliquippa Wash n Fold” as a static site (no backend required). Use modern, clean HTML/CSS/JS (or React + Vite if you prefer), mobile-first, fast load, accessible (WCAG-minded), and easy to self-host. Deliver a complete repo with clear file structure, comments, and a short README with local run steps.
+
+IMPORTANT ARCHITECTURE CONSTRAINT
+- The site must remain static.
+- Form submissions must be handled via FormSubmit (email relay).
+- No server-side code, databases, or secrets.
+- SMS/phone links are allowed as secondary actions, not primary submission handling.
+- Implement anti-spam Option 1 (honeypot field) to reduce bot submissions.
+
+Brand / Business
+- Business name: Aliquippa Wash n Fold
+- Address: 447 Franklin Avenue, Aliquippa, PA 15001
+- Primary phone: 724-800-0295
+- Tone: practical, neighborhood-friendly, professional
+- Include a sticky “Call/Text” button for mobile using tel: and sms: links to 724-800-0295.
+
+PAGE STRUCTURE (single page with anchored sections)
+
+1) Hero / Top Bar
+- Simple hero with name and short promise (fast, affordable wash & fold).
+- Primary CTA: “Place an Order”
+- Secondary CTA: “Call/Text 724-800-0295”
+- Hours placeholder and “same-day when available” disclaimer.
+
+2) Wash & Fold Order Section (core feature)
+Create a prominent HTML form that submits via FormSubmit.
+
+Form behavior
+- Use:
+  <form action="https://formsubmit.co/YOUR_EMAIL_HERE" method="POST">
+- Include FormSubmit control fields:
+  - _subject = “New Wash & Fold Order”
+  - _template = “table”
+  - _captcha = false (initially)
+  - _next = thank-you confirmation page or section
+- All pricing logic runs client-side only.
+- On submit:
+  - FormSubmit emails the full order details.
+  - Show a confirmation message on success.
+
+Anti-spam (honeypot field) — REQUIRED
+- Add ONE honeypot text input that is visually hidden via CSS (not type="hidden").
+- Use a generic field name like "company" or "website" (do not name it "honeypot" or "spam").
+- Set autocomplete="off" and tabindex="-1".
+- Place it near the top of the form.
+- Add a short inline comment explaining what it is.
+- If the honeypot receives a value, block submit client-side OR allow submit but include a hidden flag so it’s obvious in the email. Prefer blocking submit with a generic error message.
+
+Form fields
+- Required:
+  - Full name
+  - Phone number
+- Optional:
+  - Email
+  - Notes (stains, hypoallergenic, separate loads, etc.)
+
+Service selection
+- Service type:
+  - Wash & Fold (default)
+  - Commercial Quote
+- Fulfillment method:
+  - Drop-off
+  - Pickup
+  - Delivery
+- Address:
+  - Required only if Pickup, Delivery, or Commercial Quote is selected
+
+Delivery / Pickup pricing logic (client-side only)
+- Distance calculated from 447 Franklin Avenue, Aliquippa, PA 15001
+- Pricing:
+  - $5 if distance < 5 miles
+  - $10 if distance ≥ 5 miles and < 20 miles
+  - If distance ≥ 20 miles → “Quote Required”
+- If quote required:
+  - Lock pricing display
+  - Require additional commercial fields
+
+Distance calculation
+- Preferred:
+  - Google Maps JS API or Mapbox (if API key present)
+- Fallback (must work with no API key):
+  - ZIP code entry or browser geolocation
+  - Straight-line distance labeled clearly as “estimate”
+
+Commercial / Quote-only fields (conditionally required)
+- Business name
+- Estimated volume (bags per week or pounds per week)
+- Frequency (one-time / weekly / bi-weekly / monthly)
+- Preferred pickup window
+- Billing preference (invoice / card)
+
+Reusable Laundry Bags (add-on)
+- Optional section titled “Reusable Laundry Bags (Optional)”
+- Explain briefly:
+  “We can return your laundry in reusable bags that you keep for future orders.”
+- Options with quantity selectors:
+  - Large Laundry Bag — $10
+  - Extra Large Laundry Bag — $15
+- One-time purchase unless reordered
+- Include selections and totals in:
+  - On-page order summary
+  - Form submission email
+
+Weight estimate helper (optional)
+- Accordion titled “Optional: Estimate your laundry size”
+- Presets:
+  - Small (1 bag)
+  - Medium (2 bags)
+  - Large (3+ bags)
+- Provide examples; do not require pounds
+- Pounds input allowed but optional
+- Weight is guidance only; final pricing determined after weighing
+
+UX requirements
+- Live-updating order summary:
+  - Delivery fee tier or “Quote Required”
+  - Bag add-ons
+- Clear validation states
+- Address and commercial fields enforced only when applicable
+
+3) Laundromat Tips Gallery
+- Rotating gallery/carousel
+- Auto-rotate every 5–7 seconds
+- Manual arrows/dots
+- Pause on hover
+- Five tips minimum:
+  1) Don’t overload washers
+  2) Check pockets
+  3) Separate towels and blankets
+  4) Use correct detergent amount
+  5) Clean lint traps / maintain airflow
+
+4) Supporting Sections
+
+A) Pricing Snapshot
+- Wash & Fold priced by weight at the shop
+- Pickup/Delivery:
+  - $5 under 5 miles
+  - $10 under 20 miles
+  - Quote beyond
+- Reusable bags:
+  - Large $10
+  - Extra Large $15
+- Disclaimer:
+  “Final total confirmed after weighing.”
+
+B) How It Works
+- Order → Bag it → We weigh, wash, fold, and confirm
+
+C) Service Area
+- Mini-map centered on store if API available
+- Text fallback explaining distance tiers
+
+D) FAQ (5–8 items)
+- Turnaround time
+- How pricing works
+- Detergent preferences
+- Hypoallergenic requests
+- Bedding
+- Commercial accounts
+- Outside service area
+- Reusable laundry bags
+
+E) Footer
+- Address
+- Phone
+- Hours placeholder
+- “Locally owned” line
+
+DESIGN / TECH REQUIREMENTS
+- Single-page layout with anchored navigation
+- Responsive
+- Minimal dependencies
+- Accessible (semantic HTML, ARIA for carousel, focus states)
+- Performance-focused
+- Realistic placeholder copy and assets
+- README covering:
+  - Local development
+  - Replit usage
+  - Static deployment
+  - FormSubmit setup (including where to put YOUR_EMAIL_HERE)
+  - How honeypot spam protection works
+
+OUTPUT
+- Deliver a fully working static site.
+- No pseudo-code.
+- Must function with zero API keys.
+- Graceful degradation for all optional features.
+
+BRAND COLORS (match the provided logo)
+- Deep Green: #145C39
+- Deep Blue: #244286
+- Bright Cyan: #20AFE5
+- Aqua: #15B6E3
+- Light Aqua: #3EC0D8
+- Neutrals: #FFFFFF, optional off-white background #F6F8FB, text #0B1220
+
+IMPLEMENTATION REQUIREMENT
+- Define these as CSS variables in :root (e.g., --green, --blue, --cyan, etc.)
+- Use Deep Blue for headings/nav accents.
+- Use Deep Green for primary buttons and key highlights.
+- Use Bright Cyan / Aqua for secondary accents, badges, and carousel controls.
+- Keep backgrounds mostly white/off-white for cleanliness and readability.
+

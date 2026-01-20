@@ -26,6 +26,8 @@ export function OrderForm() {
       pounds: 0,
       bagCount: 0,
       distanceTier: "less_than_5" as const,
+      serviceType: "residential" as const,
+      businessName: "",
       humanVerify: "",
     },
   });
@@ -33,6 +35,7 @@ export function OrderForm() {
   const pounds = form.watch("pounds");
   const bagCount = form.watch("bagCount");
   const distanceTier = form.watch("distanceTier");
+  const serviceType = form.watch("serviceType");
 
   useEffect(() => {
     if (distanceTier === "more_than_20") {
@@ -72,6 +75,45 @@ export function OrderForm() {
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <FormField
+                control={form.control}
+                name="serviceType"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Service Type</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormControl>
+                        <SelectTrigger className="bg-white">
+                          <SelectValue placeholder="Select type" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="residential">Residential Wash & Fold</SelectItem>
+                        <SelectItem value="commercial">Commercial Services</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {serviceType === "commercial" && (
+                <FormField
+                  control={form.control}
+                  name="businessName"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Business Name</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Company name" className="bg-white" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )}
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <FormField
                 control={form.control}
@@ -216,10 +258,16 @@ export function OrderForm() {
                 >
                   <div className="bg-gray-50 rounded-xl p-6 mb-6 border border-gray-100">
                     <div className="flex justify-between items-center mb-2">
-                      <span className="text-muted-foreground">Estimated Total:</span>
-                      <span className="text-3xl font-bold text-primary">${estimatedTotal.toFixed(2)}</span>
+                      <span className="text-muted-foreground">{serviceType === 'commercial' ? 'Est. Service Total:' : 'Estimated Total:'}</span>
+                      <span className="text-3xl font-bold text-primary">
+                        {serviceType === 'commercial' ? 'Quote Req.' : `$${estimatedTotal.toFixed(2)}`}
+                      </span>
                     </div>
-                    <p className="text-xs text-muted-foreground text-right">*Includes delivery fee based on distance</p>
+                    <p className="text-xs text-muted-foreground text-right">
+                      {serviceType === 'commercial' 
+                        ? '*Commercial pricing is customized based on volume'
+                        : '*Includes delivery fee based on distance'}
+                    </p>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-end">
