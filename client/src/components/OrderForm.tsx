@@ -8,26 +8,31 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Calculator, Loader2, Send, PhoneCall, Info } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
+import { Calculator, Loader2, Send, PhoneCall, Info, Clock } from "lucide-react";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function OrderForm() {
-  const mutation = useCreateOrder();
   const [estimatedTotal, setEstimatedTotal] = useState<number>(0);
   const [showCallMessage, setShowCallMessage] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSameDayAvailable, setIsSameDayAvailable] = useState(true);
 
   const form = useForm<any>({
     resolver: zodResolver(insertOrderSchema),
     defaultValues: {
       name: "",
       phone: "",
+      email: "",
       address: "",
       pounds: 0,
       bagCount: 0,
       distanceTier: "less_than_5" as const,
       serviceType: "residential" as const,
       businessName: "",
+      sameDay: false,
+      company: "", // honeypot
       humanVerify: "",
     },
   });
@@ -36,6 +41,28 @@ export function OrderForm() {
   const bagCount = form.watch("bagCount");
   const distanceTier = form.watch("distanceTier");
   const serviceType = form.watch("serviceType");
+  const sameDay = form.watch("sameDay");
+
+  useEffect(() => {
+    const checkSameDay = () => {
+      const now = new Date();
+      const etTime = new Intl.DateTimeFormat("en-US", {
+        timeZone: "America/New_York",
+        hour: "numeric",
+        hour12: false,
+      }).format(now);
+      
+      const hour = parseInt(etTime, 10);
+      setIsSameDayAvailable(hour < 9);
+      if (hour >= 9 && form.getValues("sameDay")) {
+        form.setValue("sameDay", false);
+      }
+    };
+
+    checkSameDay();
+    const interval = setInterval(checkSameDay, 60000);
+    return () => clearInterval(interval);
+  }, [form]);
 
   useEffect(() => {
     if (distanceTier === "more_than_20") {
@@ -55,10 +82,35 @@ export function OrderForm() {
     setEstimatedTotal(lbsCost + bagsCost + deliveryFee);
   }, [pounds, bagCount, distanceTier]);
 
-  function onSubmit(data: InsertOrder) {
+  function onSubmit(data: any) {
+    if (data.company) return; // Honeypot
     if (showCallMessage) return;
-    mutation.mutate(data, {
-      onSuccess: () => form.reset()
+    setIsSubmitting(true);
+
+    const formData = new FormData();
+    formData.append("_subject", "New Aliquippa Wash n Fold Order");
+    formData.append("_template", "table");
+    formData.append("_captcha", "false");
+    formData.append("_next", "https://washnfold.biz/thanks.html");
+    
+    Object.entries(data).forEach(([key, value]) => {
+      if (key === 'sameDay') {
+        formData.append("same_day", value ? "Yes (ordered before 9:00 AM ET)" : "No");
+      } else {
+        formData.append(key, String(value));
+      }
+    });
+
+    fetch("https://formsubmit.co/zeugenesmith@gmail.com", {
+      method: "POST",
+      body: formData,
+    })
+    .then(() => {
+      window.location.href = "/thanks.html";
+    })
+    .catch(() => {
+      setIsSubmitting(false);
+      alert("Failed to submit order. Please try again or call us.");
     });
   }
 
@@ -142,6 +194,22 @@ export function OrderForm() {
                 )}
               />
             </div>
+
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email (Optional)</FormLabel>
+                  <FormControl>
+                    <Input placeholder="email@example.com" type="email" className="bg-white" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <input type="text" name="company" {...form.register("company")} autoComplete="off" tabIndex={-1} style={{ display: 'none' }} />
 
             <FormField
               control={form.control}
@@ -233,6 +301,41 @@ export function OrderForm() {
               />
             </div>
 
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center bg-primary/5 p-4 rounded-xl border border-primary/10">
+              <div className="flex items-center gap-3">
+                <Clock className="w-5 h-5 text-primary" />
+                <div>
+                  <FormLabel className="text-base font-bold">Same-Day Service</FormLabel>
+                  <p className="text-xs text-muted-foreground">Order by 9:00 AM ET</p>
+                </div>
+              </div>
+              <FormField
+                control={form.control}
+                name="sameDay"
+                render={({ field }) => (
+                  <FormItem className="flex items-center justify-end space-y-0">
+                    <FormControl>
+                      <div className="flex items-center gap-2">
+                        {!isSameDayAvailable && (
+                          <span className="text-[10px] font-bold text-destructive bg-destructive/10 px-2 py-1 rounded">MISSED CUTOFF</span>
+                        )}
+                        <Switch 
+                          checked={field.value} 
+                          onCheckedChange={field.onChange}
+                          disabled={!isSameDayAvailable}
+                        />
+                      </div>
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+              {!isSameDayAvailable && (
+                <p className="col-span-2 text-[10px] text-destructive mt-1">
+                  *Same-day orders must be placed by 9:00 AM. Please select standard service.
+                </p>
+              )}
+            </div>
+
             <AnimatePresence mode="wait">
               {showCallMessage ? (
                 <motion.div 
@@ -259,9 +362,14 @@ export function OrderForm() {
                   <div className="bg-gray-50 rounded-xl p-6 mb-6 border border-gray-100">
                     <div className="flex justify-between items-center mb-2">
                       <span className="text-muted-foreground">{serviceType === 'commercial' ? 'Est. Service Total:' : 'Estimated Total:'}</span>
-                      <span className="text-3xl font-bold text-primary">
-                        {serviceType === 'commercial' ? 'Quote Req.' : `$${estimatedTotal.toFixed(2)}`}
-                      </span>
+                      <div className="flex flex-col items-end">
+                        <span className="text-3xl font-bold text-primary">
+                          {serviceType === 'commercial' ? 'Custom Quote Required' : `$${estimatedTotal.toFixed(2)}`}
+                        </span>
+                        {sameDay && (
+                          <span className="text-[10px] font-bold text-secondary bg-secondary/10 px-2 py-0.5 rounded mt-1">SAME-DAY: YES</span>
+                        )}
+                      </div>
                     </div>
                     <p className="text-xs text-muted-foreground text-right">
                       {serviceType === 'commercial' 
@@ -287,17 +395,17 @@ export function OrderForm() {
                     
                     <Button 
                       type="submit" 
-                      disabled={mutation.isPending}
+                      disabled={isSubmitting}
                       className="w-full h-11 text-lg font-bold bg-secondary hover:bg-secondary/90 transition-all shadow-lg shadow-secondary/25 hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0"
                     >
-                      {mutation.isPending ? (
+                      {isSubmitting ? (
                         <>
                           <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                          Submitting...
+                          Sending...
                         </>
                       ) : (
                         <>
-                          Schedule Pickup
+                          {serviceType === 'commercial' ? 'Request Quote' : 'Schedule Pickup'}
                           <Send className="ml-2 h-5 w-5" />
                         </>
                       )}

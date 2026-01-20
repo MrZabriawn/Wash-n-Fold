@@ -1,0 +1,60 @@
+UPDATE / FINALIZE ORDER FORM + PAGE DETAILS (static site, Replit)
+
+GLOBAL COPY / HEADER
+- Page title text: “Aliquippa Wash n Fold” (remove the period)
+- Subtext directly under header must clearly state:
+  “Coin-operated laundromat with optional wash & fold services”
+- Display hours:
+  - Mon–Thu: 7:00 AM – 10:00 PM
+  - Fri–Sun: 7:00 AM – 11:00 PM
+
+ORDER FORM — COMMERCIAL + QUOTES
+- When “Commercial Services” is selected:
+  - Primary button text must change to: “Request Quote”
+- Replace any label reading “Quote Req.” with:
+  - “Custom Quote Required” (or similar plain-language wording)
+
+SAME-DAY SERVICE FEATURE (9:00 AM cutoff, ET)
+- Add optional toggle:
+  “Same-Day Service (order by 9:00 AM)”
+- Applies to Pickup and Delivery (Drop-off optional)
+
+Rules
+- Timezone: America/New_York
+- After 9:00 AM ET:
+  - Disable the toggle OR block submission with inline error:
+    “Same-day orders must be placed by 9:00 AM. Please select standard service.”
+- Before 9:00 AM ET:
+  - Show badge in order summary: “Same-Day: YES”
+  - Include hidden field in submission:
+    name="same_day" value="Yes (ordered before 9:00 AM ET)"
+- Time enforcement:
+  - Use browser time converted to ET via Intl.DateTimeFormat
+  - If time cannot be validated, allow submit but mark in email:
+    “Same-day requested — cutoff not validated”
+
+UX updates
+- Add one line in Pricing Snapshot + FAQ:
+  “Same-day service available for orders placed by 9:00 AM.”
+- Remove the “Popular” label from the Zone 2 card
+
+FORMSUBMIT INTEGRATION (REQUIRED)
+- Form must submit via FormSubmit to: zeugenesmith@gmail.com
+- Form tag:
+  <form action="https://formsubmit.co/zeugenesmith@gmail.com" method="POST">
+
+- Include hidden fields:
+  <input type="hidden" name="_subject" value="New Aliquippa Wash n Fold Order">
+  <input type="hidden" name="_template" value="table">
+  <input type="hidden" name="_captcha" value="false">
+  <input type="hidden" name="_next" value="https://washnfold.biz/thanks.html">
+
+- Create /thanks.html with copy:
+  “Order received. We’ll confirm by text shortly.”
+
+ANTI-SPAM (HONEYPOT)
+- Keep one honeypot field:
+  <input type="text" name="company" autocomplete="off" tabindex="-1" style="display:none">
+- If the field has any value, block submission.
+
+This is a static site. No backend code. All logic client-side only.

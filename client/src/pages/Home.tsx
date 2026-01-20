@@ -41,15 +41,15 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <span className="inline-block py-1 px-3 rounded-full bg-secondary/10 text-secondary text-sm font-bold mb-6">
-                Fresh & Clean in 24 Hours
+              <span className="inline-block py-1 px-3 rounded-full bg-secondary/10 text-secondary text-sm font-bold mb-6 text-balance">
+                Coin-operated laundromat with optional wash & fold services
               </span>
               <h1 className="text-5xl md:text-7xl font-extrabold text-gray-900 mb-6 leading-tight">
                 Aliquippa <br className="hidden sm:block" />
-                <span className="text-primary">Wash n Fold.</span>
+                <span className="text-primary">Wash n Fold</span>
               </h1>
-              <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-                Premium Wash & Fold service in Aliquippa. We pick up, clean, and deliver your clothes fresh and neatly&nbsp;folded.
+              <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto text-balance">
+                Fresh & Clean in 24 Hours. Same-day service available for orders placed by 9:00 AM.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <a href="#order" className="w-full sm:w-auto px-8 py-4 bg-primary hover:bg-primary/90 text-white rounded-full font-bold text-lg shadow-lg shadow-primary/25 hover:shadow-xl hover:-translate-y-1 transition-all">
@@ -141,7 +141,6 @@ export default function Home() {
                 <div className="text-xl font-bold text-gray-900">$5.00</div>
               </div>
               <div className="bg-white p-4 rounded-xl shadow-sm border border-primary/20 relative overflow-hidden">
-                <div className="absolute top-0 right-0 bg-primary text-white text-[10px] font-bold px-2 py-1 rounded-bl-lg">POPULAR</div>
                 <div className="text-primary font-bold mb-1">Zone 2</div>
                 <div className="text-sm text-muted-foreground mb-2">5 - 20 miles</div>
                 <div className="text-xl font-bold text-gray-900">$10.00</div>
@@ -203,17 +202,13 @@ export default function Home() {
             <div>
               <h4 className="font-bold text-lg mb-4">Hours</h4>
               <ul className="space-y-2 text-gray-400 text-sm">
-                <li className="flex justify-between">
-                  <span>Monday - Friday</span>
-                  <span className="text-white">8am - 6pm</span>
+                <li className="flex justify-between gap-4">
+                  <span>Mon - Thu</span>
+                  <span className="text-white">7am - 10pm</span>
                 </li>
-                <li className="flex justify-between">
-                  <span>Saturday</span>
-                  <span className="text-white">9am - 4pm</span>
-                </li>
-                <li className="flex justify-between">
-                  <span>Sunday</span>
-                  <span className="text-gray-600">Closed</span>
+                <li className="flex justify-between gap-4">
+                  <span>Fri - Sun</span>
+                  <span className="text-white">7am - 11pm</span>
                 </li>
               </ul>
             </div>
