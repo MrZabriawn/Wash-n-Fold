@@ -1,0 +1,115 @@
+BUILD A PURE STATIC WEBSITE (NO FRAMEWORKS, NO BUILD STEP)
+
+Goal
+- Create a single-page, fully static website for “Aliquippa Wash n Fold”
+- Use ONLY plain HTML, CSS, and vanilla JavaScript
+- No React, no Vite, no Node server, no TypeScript, no build tools
+- Files must work by opening index.html directly in a browser
+- The site must be deployable via GitHub Pages from repo root
+
+File structure (required)
+/
+- index.html
+- thanks.html
+- styles.css
+- script.js
+- /assets (images, logo, icons)
+
+Do NOT include:
+- client/, src/, server/
+- package.json
+- node_modules
+- vite.config.*
+- build steps of any kind
+
+Brand / Header
+- Page title: “Aliquippa Wash n Fold” (no period)
+- Subtext under header must clearly state:
+  “Coin-operated laundromat with optional wash & fold services”
+- Hours displayed prominently:
+  - Mon–Thu: 7:00 AM – 10:00 PM
+  - Fri–Sun: 7:00 AM – 11:00 PM
+
+Order Form (HTML form, static)
+- Submits via FormSubmit to: zeugenesmith@gmail.com
+- Form tag:
+  <form action="https://formsubmit.co/zeugenesmith@gmail.com" method="POST">
+
+- Include hidden fields:
+  <input type="hidden" name="_subject" value="New Aliquippa Wash n Fold Order">
+  <input type="hidden" name="_template" value="table">
+  <input type="hidden" name="_captcha" value="false">
+  <input type="hidden" name="_next" value="https://washnfold.biz/thanks.html">
+
+Required fields
+- Full name
+- Phone number
+
+Optional fields
+- Email
+- Notes
+
+Service options
+- Wash & Fold (default)
+- Commercial Services
+
+Behavior
+- When Commercial Services is selected:
+  - Submit button text must change to: “Request Quote”
+- Replace any “Quote Req.” text with:
+  “Custom Quote Required”
+
+Delivery / Pickup pricing (client-side JS only)
+- Based on distance from 447 Franklin Avenue, Aliquippa, PA 15001
+- <5 miles: $5
+- 5–20 miles: $10
+- >20 miles: display “Custom Quote Required” (do not show price)
+- Remove “Popular” label from Zone 2
+
+Same-Day Service Option
+- Optional checkbox:
+  “Same-Day Service (order by 9:00 AM)”
+- Timezone: America/New_York
+- If after 9:00 AM ET:
+  - Disable option or block submit with message:
+    “Same-day orders must be placed by 9:00 AM. Please select standard service.”
+- If before cutoff:
+  - Show “Same-Day: YES” in order summary
+  - Include hidden field in submission:
+    name="same_day" value="Yes (ordered before 9:00 AM ET)"
+- If time cannot be validated:
+  - Allow submit but mark in email:
+    “Same-day requested — cutoff not validated”
+- Add one line to Pricing Snapshot + FAQ:
+  “Same-day service available for orders placed by 9:00 AM.”
+
+Reusable Laundry Bags (optional add-on)
+- Large bag: $10
+- Extra large bag: $15
+- Quantity selectors
+- Include in order summary and submission email
+
+Anti-spam (required)
+- One honeypot field (not type=hidden):
+  <input type="text" name="company" autocomplete="off" tabindex="-1" style="display:none">
+- Block submission if filled
+
+Other sections
+- Rotating laundromat tips gallery (5 tips)
+- Pricing snapshot
+- How it works (Order → Bag it → We weigh, wash, fold, confirm)
+- Owner section:
+  Zabriawn Smith — locally owned and operated
+- Footer with address and phone
+
+Constraints
+- All logic in script.js
+- No external JS frameworks
+- Tailwind only if via CDN; otherwise plain CSS
+- Must deploy cleanly on GitHub Pages from / (root)
+
+Output
+- Deliver complete static files only
+- No pseudo-code
+- No build instructions
+- Site must work without running any commands
