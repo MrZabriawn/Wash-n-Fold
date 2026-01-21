@@ -239,9 +239,10 @@
                         </div>
 
                         <!-- Same Day -->
-                        <div class="flex items-center gap-3 bg-[#145C39]/5 p-4 rounded-xl border border-[#145C39]/10" id="sameDayContainer">
+                        <div class="flex items-center gap-3 bg-gray-50 p-4 rounded-xl border border-gray-100" id="sameDayContainer">
                             <input type="checkbox" name="same_day_requested" id="sameDayToggle" class="w-5 h-5 accent-[#145C39]">
-                            <label for="sameDayToggle" class="text-sm font-bold">Express / Same-Day (+$10.00 / order by 9 AM)</label>
+                            <label for="sameDayToggle" class="text-sm font-bold text-gray-500">Express / Same-Day</label>
+                            <span id="expressStatus" class="text-[10px] font-bold text-gray-400 ml-auto">Coming soon</span>
                             <span id="cutoffWarning" class="hidden text-[10px] font-bold text-red-500 ml-auto">MISSED CUTOFF</span>
                         </div>
 
@@ -255,7 +256,7 @@
                                 </div>
                                 <div class="flex justify-between">
                                     <span class="text-gray-400">Express / Same-day</span>
-                                    <span class="font-bold">+$10.00 per order</span>
+                                    <span id="expressPricingText" class="font-bold text-gray-400 italic">Coming soon</span>
                                 </div>
                                 <div class="flex justify-between">
                                     <span class="text-gray-400">Pickup & Delivery (Aliquippa)</span>
@@ -303,7 +304,7 @@
                     <h4 class="font-bold mb-3 text-[#244286]">How does pricing work?</h4>
                     <p class="text-gray-500 text-sm leading-relaxed">
                         Wash & Fold: $1.50 / lb<br>
-                        Express / Same-day: +$10.00 per order<br>
+                        <span id="faqExpressText">Express / Same-day: Coming soon</span><br>
                         Pickup & Delivery: $5 Aliquippa, $8 Beaver County<br>
                         Disposable laundry bags (provided by us): $0.50 each<br>
                         Final price is confirmed after weigh-in at the shop.
@@ -322,7 +323,7 @@
                     <h4 class="font-bold mb-3 text-[#244286]">What’s the turnaround time?</h4>
                     <p class="text-gray-500 text-sm leading-relaxed">
                         Standard service is typically next day. Express / Same-day service<br>
-                        (+$10.00) is available for orders placed by 9:00 AM.
+                        is currently unavailable (Coming soon).
                     </p>
                 </div>
                 <div class="border rounded-2xl p-6 hover:border-[#244286]/30 transition-colors">
