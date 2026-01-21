@@ -170,15 +170,15 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                             </svg>
                                         </button>
-                                        <div class="absolute bottom-full right-0 mb-2 w-72 p-5 bg-gray-900 text-white text-xs rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 pointer-events-none shadow-2xl border border-gray-800">
+                                        <div class="absolute bottom-full right-0 mb-2 w-80 p-6 bg-gray-900 text-white text-xs rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 pointer-events-none shadow-2xl border border-gray-800">
                                             <h5 class="font-bold border-b border-gray-700 pb-2 mb-3 uppercase tracking-wider text-[#20AFE5]">Weight Guide</h5>
                                             <ul class="space-y-2">
-                                                <li class="flex justify-between"><span>Jeans (Adult)</span> <span class="text-[#20AFE5] font-mono">~1.5 lbs</span></li>
-                                                <li class="flex justify-between"><span>Sweatshirt / Hoodie</span> <span class="text-[#20AFE5] font-mono">~1.2 lbs</span></li>
-                                                <li class="flex justify-between"><span>Bath Towel (Large)</span> <span class="text-[#20AFE5] font-mono">~1.0 lb</span></li>
-                                                <li class="flex justify-between"><span>T-Shirt (Adult)</span> <span class="text-[#20AFE5] font-mono">~0.5 lb</span></li>
-                                                <li class="flex justify-between"><span>Queen Sheet Set</span> <span class="text-[#20AFE5] font-mono">~3.0 lbs</span></li>
-                                                <li class="flex justify-between font-bold pt-2 border-t border-gray-700 mt-2"><span>Full Basket</span> <span class="text-white">~15-20 lbs</span></li>
+                                                <li class="flex justify-between items-center gap-4"><span>Jeans (Adult)</span> <span class="text-[#20AFE5] font-mono whitespace-nowrap">~1.5 lbs</span></li>
+                                                <li class="flex justify-between items-center gap-4"><span>Sweatshirt / Hoodie</span> <span class="text-[#20AFE5] font-mono whitespace-nowrap">~1.2 lbs</span></li>
+                                                <li class="flex justify-between items-center gap-4"><span>Bath Towel (Large)</span> <span class="text-[#20AFE5] font-mono whitespace-nowrap">~1.0 lb</span></li>
+                                                <li class="flex justify-between items-center gap-4"><span>T-Shirt (Adult)</span> <span class="text-[#20AFE5] font-mono whitespace-nowrap">~0.5 lb</span></li>
+                                                <li class="flex justify-between items-center gap-4"><span>Queen Sheet Set</span> <span class="text-[#20AFE5] font-mono whitespace-nowrap">~3.0 lbs</span></li>
+                                                <li class="flex justify-between items-center gap-4 font-bold pt-2 border-t border-gray-700 mt-2"><span>Full Basket</span> <span class="text-white whitespace-nowrap">~15-20 lbs</span></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -201,7 +201,29 @@
 
                         <!-- Add-ons -->
                         <div class="bg-gray-50 p-6 rounded-2xl space-y-4">
-                            <h4 class="font-bold text-gray-700">Reusable Laundry Bags (Optional)</h4>
+                            <div class="flex items-center justify-between">
+                                <h4 class="font-bold text-gray-700">Reusable Laundry Bags (Optional)</h4>
+                                <div class="relative group">
+                                    <button type="button" class="text-gray-400 hover:text-[#244286] transition-colors">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                    </button>
+                                    <div class="absolute bottom-full right-0 mb-2 w-72 p-5 bg-gray-900 text-white text-xs rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 pointer-events-none shadow-2xl border border-gray-800">
+                                        <h5 class="font-bold border-b border-gray-700 pb-2 mb-3 uppercase tracking-wider text-[#20AFE5]">Bag Sizes & Capacity</h5>
+                                        <ul class="space-y-3">
+                                            <li>
+                                                <span class="font-bold block text-white mb-1">Large (20-gallon)</span>
+                                                <span class="text-gray-400">Fits roughly a standard week of clothes for one person.</span>
+                                            </li>
+                                            <li>
+                                                <span class="font-bold block text-white mb-1">Extra Large (30-gallon)</span>
+                                                <span class="text-gray-400">Fits a heavier week of clothes, multiple people, or clothing plus towels.</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="flex items-center justify-between">
                                 <span class="text-sm">Large Bag ($10)</span>
                                 <input type="number" name="large_bags" id="large_bags" value="0" min="0" class="w-20 px-3 py-1 rounded-lg border">
