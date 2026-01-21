@@ -3,64 +3,24 @@ const pricing = {
     perPound: 1.5,
     perBag: 0.5,
     delivery: {
-        less_than_5: 5,
-        5_to_20: 10,
-        more_than_20: 0 // Custom quote required
-    },
-    bags: {
-        large: 10,
-        xl: 15
+        aliquippa: 5,
+        beaver_county: 8
     }
 };
 
 const form = document.getElementById('orderForm');
-const estTotalDisplay = document.getElementById('estTotal');
 const serviceTypeSelect = document.getElementById('serviceType');
 const submitBtn = document.getElementById('submitBtn');
 const distanceSelect = document.getElementById('distance');
 const businessField = document.getElementById('businessField');
 const sameDayToggle = document.getElementById('sameDayToggle');
-const sameDayBadge = document.getElementById('sameDayBadge');
 const cutoffWarning = document.getElementById('cutoffWarning');
-const pricingNote = document.getElementById('pricingNote');
-
-// Update Estimate
-function updateEstimate() {
-    const serviceType = serviceTypeSelect.value;
-    const distance = distanceSelect.value;
-    const pounds = parseFloat(document.getElementById('pounds').value) || 0;
-    const bags = parseInt(document.getElementById('bags').value) || 0;
-    const largeBags = parseInt(document.getElementById('large_bags').value) || 0;
-    const xlBags = parseInt(document.getElementById('xl_bags').value) || 0;
-    const isSameDay = sameDayToggle.checked;
-
-    if (serviceType === 'Commercial' || distance === 'more_than_20') {
-        estTotalDisplay.textContent = 'Custom Quote Required';
-        pricingNote.textContent = '*Pricing is customized based on volume and distance.';
-        return;
-    }
-
-    pricingNote.textContent = '*Pricing: $1.50/lb + $0.50/bag + delivery fee. Final confirmed after weighing.';
-    
-    let total = (pounds * pricing.perPound) + (bags * pricing.perBag);
-    total += pricing.delivery[distance] || 0;
-    total += (largeBags * pricing.bags.large) + (xlBags * pricing.bags.xl);
-
-    estTotalDisplay.textContent = `$${total.toFixed(2)}`;
-    
-    if (isSameDay) {
-        sameDayBadge.classList.remove('hidden');
-    } else {
-        sameDayBadge.classList.add('hidden');
-    }
-}
 
 // Service Type Change
 serviceTypeSelect.addEventListener('change', () => {
     const isCommercial = serviceTypeSelect.value === 'Commercial';
     businessField.classList.toggle('hidden', !isCommercial);
     submitBtn.innerHTML = isCommercial ? 'Request Quote &rarr;' : 'Schedule Pickup &rarr;';
-    updateEstimate();
 });
 
 // Timezone Check (Same Day Cutoff)
@@ -90,19 +50,5 @@ form.addEventListener('submit', (e) => {
     }
 });
 
-// Event Listeners for inputs
-const inputIds = ['pounds', 'bags', 'distance', 'large_bags', 'xl_bags', 'sameDayToggle', 'serviceType'];
-inputIds.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) {
-        el.addEventListener('input', updateEstimate);
-        // For selects and checkboxes, also listen for change to be extra sure
-        if (el.tagName === 'SELECT' || el.type === 'checkbox') {
-            el.addEventListener('change', updateEstimate);
-        }
-    }
-});
-
 // Init
 checkSameDayCutoff();
-updateEstimate();

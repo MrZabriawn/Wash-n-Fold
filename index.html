@@ -65,7 +65,7 @@
                 <div class="bg-white p-10 rounded-3xl shadow-sm border border-gray-100">
                     <h3 class="text-xl font-bold mb-4 text-[#244286]">Wash & Fold</h3>
                     <div class="text-5xl font-extrabold mb-4">$1.50<span class="text-lg text-gray-400 font-normal">/lb</span></div>
-                    <p class="text-gray-500">Sorted, washed, dried, and perfectly folded. 10lb minimum order.</p>
+                    <p class="text-gray-500">Sorted, washed, dried, and perfectly folded. 10lb minimum order. Cleaned clothes are returned in disposable laundry bags ($0.50 each).</p>
                 </div>
                 <div class="bg-white p-10 rounded-3xl shadow-sm border border-[#145C39]/20 scale-105 relative">
                     <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#145C39] text-white text-xs font-bold px-4 py-1 rounded-full">BUSINESS CHOICE</div>
@@ -76,7 +76,7 @@
                 <div class="bg-white p-10 rounded-3xl shadow-sm border border-gray-100">
                     <h3 class="text-xl font-bold mb-4 text-[#20AFE5]">Delivery</h3>
                     <div class="text-5xl font-extrabold mb-4">$5.00+<span class="text-lg text-gray-400 font-normal">/order</span></div>
-                    <p class="text-gray-500">Based on distance. Free pickup on all orders.</p>
+                    <p class="text-gray-500">Flat fees based on location. Available within Beaver County only.</p>
                 </div>
             </div>
 
@@ -85,19 +85,19 @@
                 <h3 class="text-2xl font-bold mb-8 text-center">Delivery Zones from 447 Franklin Ave</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="p-6 rounded-2xl bg-gray-50">
-                        <div class="font-bold text-[#145C39] mb-1">Zone 1</div>
+                        <div class="font-bold text-[#145C39] mb-1">Aliquippa</div>
                         <div class="text-sm text-gray-500 mb-2">&lt; 5 miles</div>
                         <div class="text-2xl font-bold">$5.00</div>
                     </div>
                     <div class="p-6 rounded-2xl bg-[#244286]/5 border border-[#244286]/10">
-                        <div class="font-bold text-[#244286] mb-1">Zone 2</div>
-                        <div class="text-sm text-gray-500 mb-2">5 – 20 miles</div>
-                        <div class="text-2xl font-bold">$10.00</div>
+                        <div class="font-bold text-[#244286] mb-1">Beaver County</div>
+                        <div class="text-sm text-gray-500 mb-2">Extended area</div>
+                        <div class="text-2xl font-bold">$8.00</div>
                     </div>
                     <div class="p-6 rounded-2xl bg-gray-50">
-                        <div class="font-bold text-gray-400 mb-1">Zone 3</div>
-                        <div class="text-sm text-gray-500 mb-2">&gt; 20 miles</div>
-                        <div class="text-xl font-bold">Custom Quote Required</div>
+                        <div class="font-bold text-gray-400 mb-1">Outside Beaver County</div>
+                        <div class="text-sm text-gray-500 mb-2">Service Limit</div>
+                        <div class="text-xl font-bold text-gray-400">Not Available</div>
                     </div>
                 </div>
             </div>
@@ -162,8 +162,9 @@
 
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div>
-                                <label class="block text-sm font-bold mb-2">Number of Bags</label>
-                                <input type="number" name="bags" id="bags" value="0" min="0" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#244286] outline-none">
+                                <label class="block text-sm font-bold mb-2">Approx. Disposable Bags Needed</label>
+                                <input type="number" name="bags" id="bags" value="1" min="1" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#244286] outline-none">
+                                <p class="text-[10px] text-gray-400 mt-1 italic">We provide these plastic bags at $0.50 each.</p>
                             </div>
                             <div>
                                 <div class="flex items-center justify-between mb-2">
@@ -183,6 +184,9 @@
                                                 <li class="flex justify-between items-center gap-4"><span>T-Shirt (Adult)</span> <span class="text-[#20AFE5] font-mono whitespace-nowrap">~0.5 lb</span></li>
                                                 <li class="flex justify-between items-center gap-4"><span>Queen Sheet Set</span> <span class="text-[#20AFE5] font-mono whitespace-nowrap">~3.0 lbs</span></li>
                                                 <li class="flex justify-between items-center gap-4 font-bold pt-2 border-t border-gray-700 mt-2"><span>Full Basket</span> <span class="text-white whitespace-nowrap">~15-20 lbs</span></li>
+                                                <li class="flex flex-col pt-2 border-t border-gray-700 mt-2 text-[10px] text-gray-400 italic">
+                                                    <span>One disposable laundry bag typically holds about 10–15 lbs.</span>
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -190,11 +194,11 @@
                                 <input type="number" name="pounds" id="pounds" value="0" min="0" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#244286] outline-none">
                             </div>
                             <div>
-                                <label class="block text-sm font-bold mb-2">Distance</label>
+                                <label class="block text-sm font-bold mb-2">Location / Distance</label>
                                 <select name="distance" id="distance" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#244286] outline-none">
-                                    <option value="less_than_5">&lt; 5 miles</option>
-                                    <option value="5_to_20">5 – 20 miles</option>
-                                    <option value="more_than_20">&gt; 20 miles</option>
+                                    <option value="aliquippa">Aliquippa ($5.00)</option>
+                                    <option value="beaver_county">Beaver County ($8.00)</option>
+                                    <option value="outside">Outside Beaver County (N/A)</option>
                                 </select>
                             </div>
                         </div>
@@ -202,7 +206,7 @@
                         <!-- Add-ons -->
                         <div class="bg-gray-50 p-6 rounded-2xl space-y-4">
                             <div class="flex items-center justify-between">
-                                <h4 class="font-bold text-gray-700">Reusable Laundry Bags (Optional)</h4>
+                                <h4 class="font-bold text-gray-700">Reusable Laundry Bags (Optional Purchase)</h4>
                                 <div class="relative group">
                                     <button type="button" class="text-gray-400 hover:text-[#244286] transition-colors">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -213,11 +217,11 @@
                                         <h5 class="font-bold border-b border-gray-700 pb-2 mb-3 uppercase tracking-wider text-[#20AFE5]">Bag Sizes & Capacity</h5>
                                         <ul class="space-y-3">
                                             <li>
-                                                <span class="font-bold block text-white mb-1">Large (20-gallon)</span>
+                                                <span class="font-bold block text-white mb-1">Large (20-gallon) — $10</span>
                                                 <span class="text-gray-400">Fits roughly a standard week of clothes for one person.</span>
                                             </li>
                                             <li>
-                                                <span class="font-bold block text-white mb-1">Extra Large (30-gallon)</span>
+                                                <span class="font-bold block text-white mb-1">Extra Large (30-gallon) — $15</span>
                                                 <span class="text-gray-400">Fits a heavier week of clothes, multiple people, or clothing plus towels.</span>
                                             </li>
                                         </ul>
@@ -225,11 +229,11 @@
                                 </div>
                             </div>
                             <div class="flex items-center justify-between">
-                                <span class="text-sm">Large Bag ($10)</span>
+                                <span class="text-sm">Large Reusable Bag ($10)</span>
                                 <input type="number" name="large_bags" id="large_bags" value="0" min="0" class="w-20 px-3 py-1 rounded-lg border">
                             </div>
                             <div class="flex items-center justify-between">
-                                <span class="text-sm">Extra Large Bag ($15)</span>
+                                <span class="text-sm">Extra Large Reusable Bag ($15)</span>
                                 <input type="number" name="xl_bags" id="xl_bags" value="0" min="0" class="w-20 px-3 py-1 rounded-lg border">
                             </div>
                         </div>
@@ -237,22 +241,40 @@
                         <!-- Same Day -->
                         <div class="flex items-center gap-3 bg-[#145C39]/5 p-4 rounded-xl border border-[#145C39]/10" id="sameDayContainer">
                             <input type="checkbox" name="same_day_requested" id="sameDayToggle" class="w-5 h-5 accent-[#145C39]">
-                            <label for="sameDayToggle" class="text-sm font-bold">Same-Day Service (order by 9:00 AM)</label>
+                            <label for="sameDayToggle" class="text-sm font-bold">Express / Same-Day (+$10.00 / order by 9 AM)</label>
                             <span id="cutoffWarning" class="hidden text-[10px] font-bold text-red-500 ml-auto">MISSED CUTOFF</span>
                         </div>
 
-                        <!-- Order Summary -->
-                        <div class="bg-gray-900 text-white p-8 rounded-3xl space-y-4">
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-400">Order Estimate:</span>
-                                <span class="text-3xl font-bold" id="estTotal">$0.00</span>
+                        <!-- Pricing Summary -->
+                        <div class="bg-gray-900 text-white p-8 rounded-3xl space-y-6">
+                            <h4 class="text-sm font-bold uppercase tracking-widest text-gray-400 border-b border-gray-800 pb-4">Standard Pricing Guide</h4>
+                            <div class="space-y-3 text-sm">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400">Wash & Fold</span>
+                                    <span class="font-bold">$1.50 / lb</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400">Express / Same-day</span>
+                                    <span class="font-bold">+$10.00 per order</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400">Pickup & Delivery (Aliquippa)</span>
+                                    <span class="font-bold">$5.00</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400">Pickup & Delivery (Beaver County)</span>
+                                    <span class="font-bold">$8.00</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400">Disposable laundry bags (provided by us)</span>
+                                    <span class="font-bold">$0.50 each</span>
+                                </div>
                             </div>
-                            <div id="sameDayBadge" class="hidden">
-                                <span class="bg-[#145C39] text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase">Same-Day: YES</span>
+                            <div class="pt-4 border-t border-gray-800">
+                                <p class="text-xs text-[#20AFE5] font-bold">
+                                    Final price is confirmed after weigh-in at the shop.
+                                </p>
                             </div>
-                            <p class="text-[10px] text-gray-500 leading-tight" id="pricingNote">
-                                *Pricing: $1.50/lb + $0.50/bag + delivery fee. Final confirmed after weighing.
-                            </p>
                         </div>
 
                         <div>
@@ -280,69 +302,51 @@
                 <div class="border rounded-2xl p-6 hover:border-[#244286]/30 transition-colors">
                     <h4 class="font-bold mb-3 text-[#244286]">How does pricing work?</h4>
                     <p class="text-gray-500 text-sm leading-relaxed">
-                        Wash & Fold pricing is based on weight after we weigh your laundry<br>
-                        at the shop. Pickup and delivery fees are flat based on distance.<br>
-                        We always confirm the total by text before starting.
+                        Wash & Fold: $1.50 / lb<br>
+                        Express / Same-day: +$10.00 per order<br>
+                        Pickup & Delivery: $5 Aliquippa, $8 Beaver County<br>
+                        Disposable laundry bags (provided by us): $0.50 each<br>
+                        Final price is confirmed after weigh-in at the shop.
                     </p>
                 </div>
                 <div class="border rounded-2xl p-6 hover:border-[#244286]/30 transition-colors">
-                    <h4 class="font-bold mb-3 text-[#244286]">Do I need to estimate the weight of my laundry?</h4>
+                    <h4 class="font-bold mb-3 text-[#244286]">What are disposable laundry bags?</h4>
                     <p class="text-gray-500 text-sm leading-relaxed">
-                        No. Estimates are optional. We weigh everything ourselves.<br>
-                        Estimates just help us plan capacity.
+                        All cleaned clothes are returned in disposable laundry bags provided<br>
+                        by us at $0.50 per bag. These are high-quality plastic bags designed<br>
+                        to keep your laundry fresh and protected. One disposable bag typically<br>
+                        holds about 10–15 lbs.
                     </p>
                 </div>
                 <div class="border rounded-2xl p-6 hover:border-[#244286]/30 transition-colors">
                     <h4 class="font-bold mb-3 text-[#244286]">What’s the turnaround time?</h4>
                     <p class="text-gray-500 text-sm leading-relaxed">
-                        Standard service is typically next day. Same-day service is available<br>
-                        for orders placed by 9:00 AM, when capacity allows.
-                    </p>
-                </div>
-                <div class="border rounded-2xl p-6 hover:border-[#244286]/30 transition-colors">
-                    <h4 class="font-bold mb-3 text-[#244286]">What detergent do you use? Can I request hypoallergenic?</h4>
-                    <p class="text-gray-500 text-sm leading-relaxed">
-                        We use quality commercial detergent. Hypoallergenic detergent or<br>
-                        customer-provided detergent is available—just note it in your order.
-                    </p>
-                </div>
-                <div class="border rounded-2xl p-6 hover:border-[#244286]/30 transition-colors">
-                    <h4 class="font-bold mb-3 text-[#244286]">Can you wash bedding and larger items?</h4>
-                    <p class="text-gray-500 text-sm leading-relaxed">
-                        Yes. Comforters, blankets, and other bulky items are accepted.<br>
-                        Oversized items may affect turnaround time.
+                        Standard service is typically next day. Express / Same-day service<br>
+                        (+$10.00) is available for orders placed by 9:00 AM.
                     </p>
                 </div>
                 <div class="border rounded-2xl p-6 hover:border-[#244286]/30 transition-colors">
                     <h4 class="font-bold mb-3 text-[#244286]">Do you offer pickup and delivery?</h4>
                     <p class="text-gray-500 text-sm leading-relaxed">
-                        Yes. Pickup and delivery are available within our service area.<br>
-                        Fees are based on distance and confirmed by text after submission.
+                        Yes. Pickup and delivery are available within Beaver County.<br>
+                        Fees are $5 for Aliquippa and $8 for Beaver County. We do not<br>
+                        currently serve areas outside Beaver County.
                     </p>
                 </div>
                 <div class="border rounded-2xl p-6 hover:border-[#244286]/30 transition-colors">
-                    <h4 class="font-bold mb-3 text-[#244286]">What if I’m outside the service area or need commercial service?</h4>
-                    <p class="text-gray-500 text-sm leading-relaxed">
-                        Submit a request and we’ll provide a custom quote.
-                    </p>
-                </div>
-                <div class="border rounded-2xl p-6 hover:border-[#244286]/30 transition-colors">
-                    <h4 class="font-bold mb-3 text-[#244286]">Do you sell laundry bags?</h4>
+                    <h4 class="font-bold mb-3 text-[#244286]">Do you sell reusable laundry bags?</h4>
                     <div class="text-gray-500 text-sm leading-relaxed space-y-4">
-                        <p>Yes. We offer reusable laundry bags you keep for future orders:</p>
+                        <p>Yes. We offer reusable laundry bags you can purchase for future orders:</p>
                         <ul class="list-disc pl-5 space-y-2">
                             <li>
-                                <strong>Large (20-gallon)</strong> — fits roughly a standard week<br>
+                                <strong>Large (20-gallon) — $10</strong> — fits roughly a standard week<br>
                                 of clothes for one person
                             </li>
                             <li>
-                                <strong>Extra Large (30-gallon)</strong> — fits a heavier week of clothes,<br>
+                                <strong>Extra Large (30-gallon) — $15</strong> — fits a heavier week of clothes,<br>
                                 multiple people, or clothing plus towels
                             </li>
                         </ul>
-                        <p class="pt-2 font-semibold text-[#145C39]">
-                            Bag pricing: $10 (20-gallon) and $15 (30-gallon)
-                        </p>
                     </div>
                 </div>
             </div>
