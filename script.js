@@ -91,9 +91,16 @@ form.addEventListener('submit', (e) => {
 });
 
 // Event Listeners for inputs
-['pounds', 'bags', 'distance', 'large_bags', 'xl_bags', 'sameDayToggle'].forEach(id => {
+const inputIds = ['pounds', 'bags', 'distance', 'large_bags', 'xl_bags', 'sameDayToggle', 'serviceType'];
+inputIds.forEach(id => {
     const el = document.getElementById(id);
-    if (el) el.addEventListener('input', updateEstimate);
+    if (el) {
+        el.addEventListener('input', updateEstimate);
+        // For selects and checkboxes, also listen for change to be extra sure
+        if (el.tagName === 'SELECT' || el.type === 'checkbox') {
+            el.addEventListener('change', updateEstimate);
+        }
+    }
 });
 
 // Init
