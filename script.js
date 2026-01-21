@@ -13,15 +13,6 @@ const pricing = {
     }
 };
 
-const tips = [
-    { title: "Sort Before You Go", desc: "Save time by sorting your lights, darks, and towels at home. It makes loading washers a breeze!" },
-    { title: "Check Your Pockets", desc: "Pens, coins, and tissues can ruin a whole load. Always double-check those pockets!" },
-    { title: "The Dryer Rule", desc: "Clothes need room to tumble. A half-full dryer dries faster and leaves fewer wrinkles." },
-    { title: "Cold Water Wins", desc: "Washing in cold water prevents shrinking and fading while saving energy at home." },
-    { title: "Correct Detergent", desc: "Using too much soap can leave residue on your clothes. Follow the machine instructions for the best clean." }
-];
-
-let currentTip = 0;
 const form = document.getElementById('orderForm');
 const estTotalDisplay = document.getElementById('estTotal');
 const serviceTypeSelect = document.getElementById('serviceType');
@@ -89,33 +80,6 @@ function checkSameDayCutoff() {
     }
 }
 
-// Carousel
-function updateTip() {
-    const content = document.getElementById('tipContent');
-    content.style.opacity = '0';
-    setTimeout(() => {
-        document.getElementById('tipTitle').textContent = tips[currentTip].title;
-        document.getElementById('tipDesc').textContent = tips[currentTip].desc;
-        content.style.opacity = '1';
-    }, 200);
-}
-
-document.getElementById('nextTip').addEventListener('click', () => {
-    currentTip = (currentTip + 1) % tips.length;
-    updateTip();
-});
-
-document.getElementById('prevTip').addEventListener('click', () => {
-    currentTip = (currentTip - 1 + tips.length) % tips.length;
-    updateTip();
-});
-
-// Auto-rotate tips
-setInterval(() => {
-    currentTip = (currentTip + 1) % tips.length;
-    updateTip();
-}, 6000);
-
 // Form Submit Handling
 form.addEventListener('submit', (e) => {
     const company = form.querySelector('[name="company"]').value;
@@ -134,5 +98,4 @@ form.addEventListener('submit', (e) => {
 
 // Init
 checkSameDayCutoff();
-updateTip();
 updateEstimate();
